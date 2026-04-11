@@ -2450,13 +2450,39 @@ document.addEventListener('mousemove',e=>{
   });
 });
 
-/* ── GRAPHQL MOCK ── */
-async function gql(query,variables={}){
-  // Replace with actual endpoint:
-  // const r=await fetch('/graphql',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({query,variables})});
-  // return r.json();
-  return{data:{simulated:true}};
+/* ── GRAPHQL LIVE ENDPOINT ── */
+async function gql(query, variables={}) {
+  const token = localStorage.getItem('studySyncToken') || '';
+  try {
+    const r = await fetch('http://localhost:4000/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+      },
+      body: JSON.stringify({ query, variables })
+    });
+    const json = await r.json();
+    if (json.errors) {
+      console.error('GraphQL Errors:', json.errors);
+      toast(json.errors[0].message, 'error');
+      throw new Error(json.errors[0].message);
+    }
+    return json;
+  } catch (err) {
+    if (err.message !== 'Failed to fetch') console.error(err);
+    else toast('Could not connect to Gateway!', 'error');
+    return { data: null, error: err.message };
+  }
 }
+
+// Polling simulation for WebSockets / real-time
+setInterval(async () => {
+  const token = localStorage.getItem('studySyncToken');
+  if(token && document.getElementById('pg-notifications').classList.contains('active')) {
+     // Fetch notifications logic via gql
+  }
+}, 15000);
 </script>
 </body>
 </html>
