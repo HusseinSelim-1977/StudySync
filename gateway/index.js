@@ -237,6 +237,7 @@ const resolvers = {
 };
 
 const startServer = async () => {
+  const app = express();
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -269,9 +270,20 @@ const startServer = async () => {
     res.json({ status: 'ok', service: 'gateway', timestamp: new Date().toISOString() });
   });
 
-  app.listen(PORT, () => {
+  const httpServer = app.listen(PORT, () => {
     console.log(\`GraphQL Gateway running at http://localhost:\${PORT}/graphql\`);
   });
+  // Graceful shutdown
+  const shutdown = async () => {
+    console.log("Shutting down Gateway...");
+    httpServer.close(() => {
+      console.log("HTTP server closed.");
+      process.exit(0);
+    });
+    setTimeout(() => process.exit(1), 10000);
+  };
+  process.on("SIGINT", shutdown);
+  process.on("SIGTERM", shutdown);
 };
 
 startServer();

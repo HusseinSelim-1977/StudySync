@@ -18,4 +18,6 @@ model User {
   contactPhone String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([email])
 }
