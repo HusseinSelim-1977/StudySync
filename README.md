@@ -38,8 +38,11 @@ Real-Time Study Buddy Matcher
 
 ## Setup Instructions
 
-1. Copy `.env.example` to `.env` and fill out your Neon DB URIs. Keep secrets safe!
-2. Ensure you have Docker and NodeJS latest LTS ready.
-3. Run `npm install` inside all service folders, generating Prisma engines with `npx prisma db push`.
-4. Run `docker-compose up -d --build` to launch Zookeeper, Kafka, KafkaUI, the 7 Microservices, and the Apollo GraphQL Gateway.
-5. In your target file explore `frontend/index.html` via any web server plugin logic mappings.
+1. **Environment Setup:** 
+   Copy `.env.example` to `.env`. For each service, you will need a separate PostgreSQL database instance (Neon DB works best). Replace the placeholder connection strings (e.g. `USER_DB_URL`, `PROFILE_DB_URL`) with your actual URIs. Provide a unique, random string for `JWT_SECRET`. Keep this file secure and never commit it to git.
+2. **Prisma & Dependencies:** Ensure you have Node.js and Docker installed.
+   Go to each service nested inside `services/` and run `npm install` followed by `npx prisma db push` to initialize schema tables.
+3. **Run Services:** 
+   Run `docker-compose up -d --build`. This will spin up Kafka, Zookeeper, Kafka UI, your 7 microservices, and the Apollo GraphQL Gateway natively at `http://localhost:4000/graphql`.
+4. **Use Output:** 
+   Open `frontend/index.html` via VSCode Live Server (or similar) to interact directly with the locally deployed microservices!
