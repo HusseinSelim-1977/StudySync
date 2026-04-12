@@ -142,7 +142,7 @@ const reqWithAuth = async (context, method, url, data = null) => {
       method,
       url,
       data,
-      headers: { Authorization: \`Bearer \${context.token}\` }
+      headers: { Authorization: `Bearer ${context.token}` }
     });
     return response.data;
   } catch (err) {
@@ -154,84 +154,84 @@ const resolvers = {
   Query: {
     me: async (_, __, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${USER_URL}/users/\${context.user.id}\`);
+      return reqWithAuth(context, 'GET', `${USER_URL}/users/${context.user.id}`);
     },
     myProfile: async (_, __, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${PROFILE_URL}/profile/\${context.user.id}\`);
+      return reqWithAuth(context, 'GET', `${PROFILE_URL}/profile/${context.user.id}`);
     },
     myAvailability: async (_, __, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${AVAILABILITY_URL}/availability/\${context.user.id}\`);
+      return reqWithAuth(context, 'GET', `${AVAILABILITY_URL}/availability/${context.user.id}`);
     },
     myMatches: async (_, __, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${MATCHING_URL}/matches/\${context.user.id}\`);
+      return reqWithAuth(context, 'GET', `${MATCHING_URL}/matches/${context.user.id}`);
     },
     sessions: async (_, { topic, type }, context) => {
-      let query = \`?\`;
-      if (topic) query += \`topic=\${topic}&\`;
-      if (type) query += \`type=\${type}\`;
-      return reqWithAuth(context, 'GET', \`\${SESSION_URL}/sessions\${query}\`);
+      let query = `?`;
+      if (topic) query += `topic=${topic}&`;
+      if (type) query += `type=${type}`;
+      return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions${query}`);
     },
     session: async (_, { id }, context) => {
-      return reqWithAuth(context, 'GET', \`\${SESSION_URL}/sessions/\${id}\`);
+      return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions/${id}`);
     },
     myNotifications: async (_, __, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${NOTIFICATION_URL}/notifications/\${context.user.id}\`);
+      return reqWithAuth(context, 'GET', `${NOTIFICATION_URL}/notifications/${context.user.id}`);
     },
     myConversations: async (_, __, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${MESSAGING_URL}/conversations\`);
+      return reqWithAuth(context, 'GET', `${MESSAGING_URL}/conversations`);
     },
     conversationMessages: async (_, { id }, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'GET', \`\${MESSAGING_URL}/conversations/\${id}/messages\`);
+      return reqWithAuth(context, 'GET', `${MESSAGING_URL}/conversations/${id}/messages`);
     }
   },
   Mutation: {
     register: async (_, args) => {
       try {
-        const res = await axios.post(\`\${USER_URL}/auth/register\`, args);
+        const res = await axios.post(`${USER_URL}/auth/register`, args);
         return res.data;
       } catch (err) { throw new Error(err.response?.data?.error || err.message); }
     },
     login: async (_, args) => {
       try {
-        const res = await axios.post(\`\${USER_URL}/auth/login\`, args);
+        const res = await axios.post(`${USER_URL}/auth/login`, args);
         return res.data;
       } catch (err) { throw new Error(err.response?.data?.error || err.message); }
     },
     updateProfile: async (_, args, context) => {
       if (!context.user) throw new Error("Unauthorized");
-      return reqWithAuth(context, 'PUT', \`\${PROFILE_URL}/profile/\${context.user.id}\`, args);
+      return reqWithAuth(context, 'PUT', `${PROFILE_URL}/profile/${context.user.id}`, args);
     },
     createAvailability: async (_, args, context) => {
-      return reqWithAuth(context, 'POST', \`\${AVAILABILITY_URL}/availability\`, args);
+      return reqWithAuth(context, 'POST', `${AVAILABILITY_URL}/availability`, args);
     },
     deleteAvailability: async (_, { id }, context) => {
-      await reqWithAuth(context, 'DELETE', \`\${AVAILABILITY_URL}/availability/\${id}\`);
+      await reqWithAuth(context, 'DELETE', `${AVAILABILITY_URL}/availability/${id}`);
       return true;
     },
     createSession: async (_, args, context) => {
-      return reqWithAuth(context, 'POST', \`\${SESSION_URL}/sessions\`, args);
+      return reqWithAuth(context, 'POST', `${SESSION_URL}/sessions`, args);
     },
     joinSession: async (_, { id }, context) => {
-      return reqWithAuth(context, 'POST', \`\${SESSION_URL}/sessions/\${id}/join\`);
+      return reqWithAuth(context, 'POST', `${SESSION_URL}/sessions/${id}/join`);
     },
     leaveSession: async (_, { id }, context) => {
-      await reqWithAuth(context, 'DELETE', \`\${SESSION_URL}/sessions/\${id}/leave\`);
+      await reqWithAuth(context, 'DELETE', `${SESSION_URL}/sessions/${id}/leave`);
       return true;
     },
     markNotificationRead: async (_, { id }, context) => {
-      return reqWithAuth(context, 'PUT', \`\${NOTIFICATION_URL}/notifications/\${id}/read\`);
+      return reqWithAuth(context, 'PUT', `${NOTIFICATION_URL}/notifications/${id}/read`);
     },
     sendMessage: async (_, args, context) => {
-      return reqWithAuth(context, 'POST', \`\${MESSAGING_URL}/messages\`, args);
+      return reqWithAuth(context, 'POST', `${MESSAGING_URL}/messages`, args);
     },
     createConversation: async (_, args, context) => {
-      return reqWithAuth(context, 'POST', \`\${MESSAGING_URL}/conversations\`, args);
+      return reqWithAuth(context, 'POST', `${MESSAGING_URL}/conversations`, args);
     }
   }
 };
@@ -271,7 +271,7 @@ const startServer = async () => {
   });
 
   const httpServer = app.listen(PORT, () => {
-    console.log(\`GraphQL Gateway running at http://localhost:\${PORT}/graphql\`);
+    console.log(`GraphQL Gateway running at http://localhost:${PORT}/graphql`);
   });
   // Graceful shutdown
   const shutdown = async () => {
