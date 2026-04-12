@@ -982,7 +982,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 <!-- ════════════════════════ LANDING ════════════════════════ -->
 <div id="pg-landing" class="page active">
   <nav class="landing-nav">
-    <div class="nav-logo" onclick="go('landing')">StudySync</div>
+    <button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button>
     <div style="display:flex;gap:28px;font-size:14px;color:var(--text2)">
       <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">Features</span>
       <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">How it Works</span>
@@ -1162,7 +1162,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
           <div><label class="input-label">Password<input class="input" type="password" placeholder="••••••••"/></label></div>
           <div><label class="input-label">Confirm Password<input class="input" type="password" placeholder="••••••••"/></label></div>
           <button class="btn btn-primary w-full" style="justify-content:center;margin-top:8px" onclick="handleRegister()">Create Account →</button>
-          <div style="text-align:center;font-size:14px;color:var(--text2)">Already have an account? <span style="color:var(--neo);cursor:pointer" onclick="go('login')">Sign in</span></div>
+          <div style="text-align:center;font-size:14px;color:var(--text2)">Already have an account? <span style="color:var(--neo);cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){go('login')}" onclick="go('login')">Sign in</span></div>
         </div>
       </div>
       <div style="text-align:center;margin-top:16px"><button class="btn btn-ghost btn-sm" onclick="go('landing')">← Back to Home</button></div>
@@ -1333,7 +1333,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 <!-- ════════════════════════ AVAILABILITY ════════════════════════ -->
 <div id="pg-availability" class="page">
   <nav class="navbar" id="nav-avail" aria-label="Main navigation">
-    <div class="nav-logo" onclick="go('landing')">StudySync</div>
+    <button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button>
     <div style="font-size:13px;color:var(--text2)">Availability Management</div>
     <div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div>
   </nav>
@@ -1379,7 +1379,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ DASHBOARD ════════════════════════ -->
 <div id="pg-dashboard" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link active" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link active" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap">
       <!-- Greeting -->
@@ -1527,7 +1527,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ MATCHING ════════════════════════ -->
 <div id="pg-matching" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link active" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link active" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px">
@@ -1644,7 +1644,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ MATCH DETAIL ════════════════════════ -->
 <div id="pg-match-detail" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link active" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link active" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap" style="max-width:860px">
       <button class="btn btn-ghost btn-sm" style="margin-bottom:24px" onclick="go('matching')">← Back to Matches</button>
@@ -1722,7 +1722,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ CONNECTIONS ════════════════════════ -->
 <div id="pg-connections" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link active" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link active" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap">
       <h1 style="font-size:34px;font-weight:900;letter-spacing:-1px;margin-bottom:8px">Study Buddies</h1>
@@ -1787,7 +1787,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ SESSIONS ════════════════════════ -->
 <div id="pg-sessions" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link active" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link active" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px">
@@ -1872,7 +1872,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ CREATE SESSION ════════════════════════ -->
 <div id="pg-create-session" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link active" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link active" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-80" style="position:relative;z-index:2">
     <div class="wrap" style="max-width:680px">
       <button class="btn btn-ghost btn-sm" style="margin-bottom:24px" onclick="go('sessions')">← Back to Sessions</button>
@@ -1927,7 +1927,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ NOTIFICATIONS ════════════════════════ -->
 <div id="pg-notifications" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link active nav-notif" onclick="go('notifications')">Notifications</button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link active nav-notif" onclick="go('notifications')">Notifications</button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap" style="max-width:720px">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px">
@@ -2003,7 +2003,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ MESSAGES ════════════════════════ -->
 <div id="pg-messages" class="page" style="overflow:hidden;height:100vh">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link active" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link active" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" onclick="go('profile')">A</div></div></nav>
   <div class="chat-layout">
     <div class="chat-sidebar">
       <div style="padding:20px;border-bottom:1px solid var(--rim)">
@@ -2075,7 +2075,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 
 <!-- ════════════════════════ PROFILE ════════════════════════ -->
 <div id="pg-profile" class="page">
-  <nav class="navbar" aria-label="Main navigation"><div class="nav-logo" onclick="go('landing')">StudySync</div><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" style="background:linear-gradient(135deg,#0ff,#4af);box-shadow:0 0 20px rgba(0,255,255,0.5)">A</div></div></nav>
+  <nav class="navbar" aria-label="Main navigation"><button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button><div class="nav-links"><button class="nav-link" onclick="go('dashboard')">Dashboard</button><button class="nav-link" onclick="go('matching')">Matching</button><button class="nav-link" onclick="go('sessions')">Sessions</button><button class="nav-link" onclick="go('connections')">Buddies</button><button class="nav-link" onclick="go('messages')">Messages</button><button class="nav-link nav-notif" onclick="go('notifications')">Notifications<span class="dot"></span></button></div><div class="nav-right"><div class="nav-avatar" style="background:linear-gradient(135deg,#0ff,#4af);box-shadow:0 0 20px rgba(0,255,255,0.5)">A</div></div></nav>
   <div class="pt-nav pb-60" style="position:relative;z-index:2">
     <div class="wrap" style="max-width:920px">
       <div class="profile-hero"><div class="profile-hero-ring"></div></div>
