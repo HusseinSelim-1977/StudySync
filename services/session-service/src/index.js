@@ -161,6 +161,7 @@ app.delete('/sessions/:id/leave', authenticateToken, async (req, res) => {
 const startServer = async () => {
   try {
     kafkaProducer = createProducer('session-service');
+    await kafkaProducer.connect();
     app.listen(PORT, () => console.log(`Session Service listening on port ${PORT}`));
   } catch (error) {
     console.error('Failed to start server:', error);
@@ -172,9 +173,11 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
+  await kafkaProducer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
+  await kafkaProducer.disconnect();
   process.exit(0);
 });

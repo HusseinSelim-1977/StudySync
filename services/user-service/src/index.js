@@ -118,7 +118,7 @@ const startServer = async () => {
   try {
     kafkaProducer = createProducer('user-service');
     // In production we would await connection here. 
-    // await kafkaProducer.connect();
+    await kafkaProducer.connect();
     
     app.listen(PORT, () => console.log(`User Service listening on port ${PORT}`));
   } catch (error) {
@@ -132,11 +132,11 @@ startServer();
 // Graceful Shutdown
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
-  // await kafkaProducer.disconnect();
+  await kafkaProducer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
-  // await kafkaProducer.disconnect();
+  await kafkaProducer.disconnect();
   process.exit(0);
 });

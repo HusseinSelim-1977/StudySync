@@ -163,6 +163,7 @@ app.post('/messages', authenticateToken, async (req, res) => {
 const startServer = async () => {
   try {
     kafkaProducer = createProducer('messaging-service');
+    await kafkaProducer.connect();
     app.listen(PORT, () => console.log(`Messaging Service listening on port ${PORT}`));
   } catch (error) {
     console.error('Failed to start server:', error);
@@ -174,9 +175,11 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
+  await kafkaProducer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
+  await kafkaProducer.disconnect();
   process.exit(0);
 });
