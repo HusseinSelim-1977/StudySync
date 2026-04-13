@@ -102,19 +102,17 @@ const handleKafkaEvent = async (eventName, payload) => {
 const startServer = async () => {
   try {
     kafkaConsumer = createConsumer('notification-service-group');
-    // await kafkaConsumer.connect();
-    // await kafkaConsumer.subscribe({ topic: TOPICS.MATCH_FOUND, fromBeginning: true });
-    // await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_JOINED, fromBeginning: true });
-    // await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_CANCELLED, fromBeginning: true });
+    await kafkaConsumer.connect();
+    await kafkaConsumer.subscribe({ topic: TOPICS.MATCH_FOUND, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_JOINED, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_CANCELLED, fromBeginning: true });
     
-    /*
     await kafkaConsumer.run({
       eachMessage: async ({ topic, partition, message }) => {
         const msg = JSON.parse(message.value.toString());
         await handleKafkaEvent(msg.eventName, msg.payload);
       }
     });
-    */
 
     app.listen(PORT, () => console.log(`Notification Service listening on port ${PORT}`));
   } catch (error) {
@@ -127,9 +125,11 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
+  if (kafkaConsumer) await kafkaConsumer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
+  if (kafkaConsumer) await kafkaConsumer.disconnect();
   process.exit(0);
 });

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -25,7 +23,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     healthcheck:
-      test: ["CMD-SHELL", "nc -z localhost 9092 || exit 1"]
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -43,7 +41,8 @@ services:
 
   gateway:
     build:
-      context: ./gateway
+      context: .
+      dockerfile: gateway/Dockerfile
     container_name: gateway
     ports:
       - "4000:4000"
@@ -62,7 +61,8 @@ services:
 
   user-service:
     build:
-      context: ./services/user-service
+      context: .
+      dockerfile: services/user-service/Dockerfile
     container_name: user-service
     ports:
       - "4001:4001"
@@ -73,7 +73,8 @@ services:
 
   profile-service:
     build:
-      context: ./services/profile-service
+      context: .
+      dockerfile: services/profile-service/Dockerfile
     container_name: profile-service
     ports:
       - "4002:4002"
@@ -84,7 +85,8 @@ services:
 
   availability-service:
     build:
-      context: ./services/availability-service
+      context: .
+      dockerfile: services/availability-service/Dockerfile
     container_name: availability-service
     ports:
       - "4003:4003"
@@ -95,7 +97,8 @@ services:
 
   matching-service:
     build:
-      context: ./services/matching-service
+      context: .
+      dockerfile: services/matching-service/Dockerfile
     container_name: matching-service
     ports:
       - "4004:4004"
@@ -106,7 +109,8 @@ services:
 
   session-service:
     build:
-      context: ./services/session-service
+      context: .
+      dockerfile: services/session-service/Dockerfile
     container_name: session-service
     ports:
       - "4005:4005"
@@ -117,7 +121,8 @@ services:
 
   notification-service:
     build:
-      context: ./services/notification-service
+      context: .
+      dockerfile: services/notification-service/Dockerfile
     container_name: notification-service
     ports:
       - "4006:4006"
@@ -128,7 +133,8 @@ services:
 
   messaging-service:
     build:
-      context: ./services/messaging-service
+      context: .
+      dockerfile: services/messaging-service/Dockerfile
     container_name: messaging-service
     ports:
       - "4007:4007"

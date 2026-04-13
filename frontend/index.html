@@ -2133,7 +2133,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
                   <div><label class="input-label" for="profile-year"><span>Year</span><select class="select" id="profile-year"><option>Year 3</option></select></label></div>
                 </div>
                 <div><label class="input-label" for="profile-bio"><span>Bio</span><textarea class="textarea" id="profile-bio">3rd year CS student passionate about algorithms and collaborative learning.</textarea></label></div>
-                <button class="btn btn-primary" onclick="toast('Profile updated! Kafka event published.','success')">Save Changes</button>
+                <button class="btn btn-primary" onclick="saveProfileInfo()">Save Changes</button>
               </div>
             </div>
           </div>
@@ -2166,7 +2166,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
                     <div class="pref-card" onclick="this.classList.toggle('on')"><span class="pref-emoji">🔇</span><div class="pref-label">Quiet</div></div>
                   </div>
                 </div>
-                <button class="btn btn-primary" onclick="toast('Preferences saved! Re-running match algorithm...','success')">Save Preferences</button>
+                <button class="btn btn-primary" onclick="savePreferences()">Save Preferences</button>
               </div>
             </div>
           </div>
@@ -2191,7 +2191,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
                 <div class="chip on" onclick="toggleChip(this)">Recursion</div>
                 <div class="chip" onclick="toggleChip(this)">Tree Algorithms</div>
               </div>
-              <button class="btn btn-primary" onclick="toast('Courses updated! Re-matching...','success')">Update Courses</button>
+              <button class="btn btn-primary" onclick="updateCourses()">Update Courses</button>
             </div>
           </div>
           <!-- History -->
@@ -2348,12 +2348,76 @@ window.addEventListener('load',()=>{
 });
 
 /* ── AUTH ── */
-function handleLogin(){toast('Authenticating via GraphQL...','info');setTimeout(()=>{go('dashboard');toast('Welcome back, Ahmed! 👋','success')},700)}
-function handleRegister(){toast('Creating account via GraphQL...','info');setTimeout(()=>{go('profile-setup');toast('Account created! Set up your profile.','success')},700)}
-function finishSetup(){toast('Profile complete! Running matching engine...','success');setTimeout(()=>go('dashboard'),800)}
-function doLogout(){go('landing');toast('Signed out successfully','info')}
+async function handleLogin(){
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-password').value;
+  if(!email || !pass) return toast('Please enter email and password','error');
+  
+  toast('Authenticating...','info');
+  const query = `mutation($email:String!,$pass:String!){ login(email:$email,password:$pass){ token userId } }`;
+  const res = await gql(query, { email, pass });
+  if(res.data && res.data.login) {
+    localStorage.setItem('studySyncToken', res.data.login.token);
+    localStorage.setItem('studySyncUserId', res.data.login.userId);
+    toast('Welcome back! 👋','success');
+    go('dashboard');
+  }
+}
+async function handleRegister(){
+  const fName = document.getElementById('reg-first-name').value;
+  const lName = document.getElementById('reg-last-name').value;
+  const email = document.getElementById('reg-email').value;
+  const pass = document.getElementById('reg-password').value;
+  if(!fName || !email || !pass) return toast('Required fields missing','error');
+
+  toast('Creating account...','info');
+  const name = fName + ' ' + lName;
+  const query = `mutation($e:String!,$p:String!,$n:String!){ register(email:$e,password:$p,name:$n){ id } }`;
+  const res = await gql(query, { e:email, p:pass, n:name });
+  if(res.data && res.data.register) {
+    toast('Account created! Let\'s set up your profile.','success');
+    const lQuery = `mutation($e:String!,$p:String!){ login(email:$e,password:$p){ token userId } }`;
+    const lRes = await gql(lQuery, { e:email, p:pass });
+    if(lRes.data && lRes.data.login) {
+      localStorage.setItem('studySyncToken', lRes.data.login.token);
+      localStorage.setItem('studySyncUserId', lRes.data.login.userId);
+      go('profile-setup');
+    }
+  }
+}
+async function finishSetup(){
+  toast('Verifying profile...','info');
+  // Simple check to ensure everything is initialized
+  await saveProfileInfo(); 
+  toast('Profile complete! Running matching engine...','success');
+  setTimeout(()=>go('dashboard'),800);
+}
+function doLogout(){
+  localStorage.removeItem('studySyncToken');
+  localStorage.removeItem('studySyncUserId');
+  go('landing');
+  toast('Signed out successfully','info');
+}
 
 /* ── CHIPS / PREFS ── */
+async function saveProfileInfo(){
+  const courses = Array.from(document.querySelectorAll('#ptab-courses .chip.on')).map(c => c.textContent);
+  const topics = Array.from(document.querySelectorAll('#ptab-courses div:nth-child(4) .chip.on')).map(c => c.textContent);
+  
+  const getOn = (id) => { const el = document.querySelector(`#${id} .pref-card.on`); return el ? el.querySelector('.pref-label').textContent : ''; };
+  const studyPace = getOn('ptab-prefs');
+  const studyMode = document.querySelector('#ptab-prefs div:nth-child(2) .pref-card.on') ? document.querySelector('#ptab-prefs div:nth-child(2) .pref-card.on .pref-label').textContent : 'Online';
+  const studyStyle = Array.from(document.querySelectorAll('#ptab-prefs div:nth-child(3) .pref-card.on')).map(c => c.querySelector('.pref-label').textContent).join(', ');
+
+  const query = `mutation($c:[String],$t:[String],$p:String,$m:String,$s:String){ 
+    updateProfile(courses:$c, topics:$t, studyPace:$p, studyMode:$m, studyStyle:$s){ id } 
+  }`;
+  const res = await gql(query, { c:courses, t:topics, p:studyPace, m:studyMode, s:studyStyle });
+  if(res.data) toast('Profile updated successfully!','success');
+}
+async function savePreferences(){ await saveProfileInfo(); }
+async function updateCourses(){ await saveProfileInfo(); }
+
 function toggleChip(el){el.classList.toggle('on')}
 function stopProp(e){e.stopPropagation()}
 function pickPref(g,el){el.parentElement.querySelectorAll('.pref-card').forEach(c=>c.classList.remove('on'));el.classList.add('on')}
@@ -2398,23 +2462,85 @@ function buildAvailGrid(){
   });
   g.innerHTML=h;updateAvailCount();
 }
-function toggleAvail(el){el.classList.toggle('on');updateAvailCount()}
+function toggleAvail(el){
+  el.classList.toggle('on');
+  updateAvailCount();
+  if(el.classList.contains('on')){
+    const idx = Array.from(el.parentElement.children).indexOf(el);
+    const dayNames = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+    const dayIdx = (idx % 8) - 1;
+    const timeIdx = Math.floor(idx / 8);
+    if(dayIdx >= 0){
+      const day = dayNames[dayIdx];
+      const start = (8 + timeIdx) + ':00';
+      const end = (9 + timeIdx) + ':00';
+      gql(`mutation($d:String!,$s:String!,$e:String!){ createAvailability(dayOfWeek:$d,startTime:$s,endTime:$e){ id } }`, {d:day, s:start, e:end});
+    }
+  }
+}
 function updateAvailCount(){
   const n=document.querySelectorAll('.avail-cell.on:not(.hdr)').length;
   const el=document.getElementById('avail-count');if(el)el.textContent=n+' slot'+(n!==1?'s':'')+' selected';
 }
-function availClear(){document.querySelectorAll('.avail-cell:not(.hdr)').forEach(c=>c.classList.remove('on'));updateAvailCount()}
-function availMornings(){availClear();document.querySelectorAll('.avail-cell:not(.hdr)').forEach((c,i)=>{if(Math.floor(i/7)<=3)c.classList.add('on')});updateAvailCount()}
-function availAfternoons(){availClear();document.querySelectorAll('.avail-cell:not(.hdr)').forEach((c,i)=>{const r=Math.floor(i/7);if(r>=4&&r<=7)c.classList.add('on')});updateAvailCount()}
-
-/* ── MESSAGES ── */
+async function loadMatches(){
+  const res = await gql(`{ myMatches { userId1 userId2 score reasons } }`);
+  if(res.data && res.data.myMatches){
+    const grid = document.querySelector('.match-grid');
+    if(!grid) return;
+    grid.innerHTML = res.data.myMatches.map(m => `
+      <div class="glass card-3d" style="padding:22px">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div class="match-avatar">👤</div>
+          <div class="match-score">${m.score}%</div>
+        </div>
+        <div style="margin:16px 0 6px;font-weight:700">Study Buddy Candidate</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px">${m.reasons.join(' · ')}</div>
+        <button class="btn btn-primary btn-sm" onclick="sendReq('Buddy')">Connect</button>
+      </div>
+    `).join('');
+  }
+}
+async function loadSessions(){
+  const res = await gql(`{ sessions { id title topic dateTime duration sessionType creatorId participants { userId } } }`);
+  if(res.data && res.data.sessions){
+    const grid = document.querySelector('#tb-explore');
+    if(!grid) return;
+    grid.innerHTML = res.data.sessions.map(s => `
+      <div class="glass card-3d" style="padding:22px">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div class="session-badge">${s.sessionType}</div>
+          <div class="session-date">${new Date(s.dateTime).toLocaleDateString()}</div>
+        </div>
+        <div style="margin:16px 0 6px;font-weight:700">${s.title}</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px">${s.topic} · ${s.duration} mins</div>
+        <button class="btn btn-primary btn-sm" onclick="joinSess('${s.id}')">Join Session</button>
+      </div>
+    `).join('');
+  }
+}
+window.addEventListener('load',()=>{
+  buildAvailGrid();
+  go('landing');
+  setInterval(() => {
+    loadMatches();
+    loadSessions();
+  }, 30000);
+});
 function sendMsg(){
   const input=document.getElementById('msg-in');
   const txt=input.value.trim();if(!txt)return;
   const c=document.getElementById('chat-msgs');
   const d=document.createElement('div');
   d.style.cssText='display:flex;flex-direction:column;gap:3px;align-items:flex-end';
-  d.innerHTML=`<div class="bubble me">${txt}</div><div class="bubble-time" style="text-align:right">Now</div>`;
+  const bubble=document.createElement('div');
+  bubble.className='bubble me';
+  bubble.textContent=txt;
+  const time=document.createElement('div');
+  time.className='bubble-time';
+  time.style.textAlign='right';
+  time.textContent='Now';
+  d.appendChild(bubble);
+  d.appendChild(time);
   c.appendChild(d);c.scrollTop=c.scrollHeight;input.value='';
   setTimeout(()=>{
     const r=document.createElement('div');
@@ -2427,7 +2553,26 @@ function sendMsg(){
 /* ── ACTIONS ── */
 function sendReq(n){toast(`Buddy request sent to ${n} via GraphQL 👋`,'success')}
 function acceptReq(n){toast(`Connected with ${n}! 🎉`,'success')}
-function createSession(){toast('Session created! Kafka event published & invitations sent','success');setTimeout(()=>go('sessions'),800)}
+async function createSession(){
+  const title = document.getElementById('s-title').value;
+  const topic = document.getElementById('s-topic').value;
+  const date = document.getElementById('s-date').value;
+  const duration = parseInt(document.getElementById('s-duration').value);
+  const type = document.getElementById('type-online').classList.contains('on') ? 'ONLINE' : 'INPERSON';
+  
+  const query = `mutation($t:String!,$tp:String!,$d:String!,$du:Int!,$st:String!,$mp:Int!){
+    createSession(title:$t, topic:$tp, dateTime:$d, duration:$du, sessionType:$st, maxParticipants:$mp){ id }
+  }`;
+  const res = await gql(query, { t:title, tp:topic, d:date, du:duration, st:type, mp:5 });
+  if(res.data){
+    toast('Session created! Kafka event published & invitations sent','success');
+    go('sessions');
+  }
+}
+async function joinSess(id){
+  const res = await gql(`mutation($id:ID!){ joinSession(id:$id){ id } }`, { id });
+  if(res.data) toast('Joined session successfully! 🎉','success');
+}
 function markAllRead(){document.querySelectorAll('.notif-item.unread').forEach(el=>el.classList.remove('unread'));toast('All notifications marked as read','info')}
 function markOneRead(btn){const el=btn.closest('.notif-item');if(el){el.classList.remove('unread');el.style.opacity='.5'}}
 
@@ -2506,9 +2651,9 @@ async function gql(query, variables={}) {
 setInterval(async () => {
   const token = localStorage.getItem('studySyncToken');
   if(token && document.getElementById('pg-notifications').classList.contains('active')) {
-    const data = await gql(`{ notifications { id type message read createdAt } }`);
-    if(data && data.data && data.data.notifications) {
-      renderNotifications(data.data.notifications);
+    const data = await gql(`{ myNotifications { id type title body isRead createdAt } }`);
+    if(data && data.data && data.data.myNotifications) {
+      renderNotifications(data.data.myNotifications.map(n => ({ type: n.type, message: n.body, read: n.isRead })));
     }
   }
 }, 15000);
