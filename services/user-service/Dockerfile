@@ -1,13 +1,20 @@
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
-# We create a non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-COPY package*.json ./
+# Copy and install service dependencies
+COPY services/user-service/package*.json ./
 RUN npm install --production
 
-COPY . .
-RUN chown -R appuser:appgroup /app
+# Copy shared kafka module
+COPY shared/ ./shared/
 
+# Copy service source
+COPY services/user-service/ .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+RUN chown -R appuser:appgroup /app
 USER appuser
 CMD ["npm", "start"]

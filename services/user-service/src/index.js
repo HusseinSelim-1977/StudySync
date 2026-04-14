@@ -74,8 +74,8 @@ app.post('/auth/login', async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.passwordHash);
     if (!validPassword) return res.status(400).json({ error: 'Invalid credentials' });
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '15m' });
-    const refreshToken = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user.id, email: user.email, type: 'access' }, JWT_SECRET, { expiresIn: '15m' });
+    const refreshToken = jwt.sign({ id: user.id, email: user.email, type: 'refresh' }, JWT_SECRET, { expiresIn: '7d' });
 
     res.json({ token, refreshToken, userId: user.id });
   } catch (error) {
@@ -92,6 +92,22 @@ app.get('/users/:id', authenticateToken, async (req, res) => {
 
     const { passwordHash: _ph, ...safeUser } = user;
     res.json(safeUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/auth/refresh', async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken) return res.status(400).json({ error: 'Refresh token required' });
+
+    jwt.verify(refreshToken, JWT_SECRET, (err, decoded) => {
+      if (err || decoded.type !== 'refresh') return res.status(401).json({ error: 'Invalid or expired refresh token' });
+
+      const token = jwt.sign({ id: decoded.id, email: decoded.email, type: 'access' }, JWT_SECRET, { expiresIn: '15m' });
+      res.json({ token });
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -132,11 +148,11 @@ startServer();
 // Graceful Shutdown
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
-  await kafkaProducer.disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
-  await kafkaProducer.disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
   process.exit(0);
 });

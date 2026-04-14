@@ -1,0 +1,22 @@
+{
+  "name": "studysync-frontend-tests",
+  "version": "1.0.0",
+  "description": "Tests for StudySync frontend/index.html",
+  "scripts": {
+    "test": "jest --testEnvironment jsdom --forceExit",
+    "test:run": "jest --testEnvironment jsdom --forceExit"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
+  }
+}

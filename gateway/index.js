@@ -6,7 +6,7 @@ const cors = require('cors');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 
-const PORT = process.env.GATEWAY_PORT || 4000;
+const PORT = process.env.PORT || process.env.GATEWAY_PORT || 4000;
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
 // Service URLs (Docker compose network or localhost)
@@ -169,12 +169,15 @@ const resolvers = {
       return reqWithAuth(context, 'GET', `${MATCHING_URL}/matches/${context.user.id}`);
     },
     sessions: async (_, { topic, type }, context) => {
-      let query = `?`;
-      if (topic) query += `topic=${topic}&`;
-      if (type) query += `type=${type}`;
-      return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions${query}`);
+      if (!context.user) throw new Error("Unauthorized");
+      const params = new URLSearchParams();
+      if (topic) params.set('topic', topic);
+      if (type) params.set('type', type);
+      const qs = params.toString();
+      return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions${qs ? '?' + qs : ''}`);
     },
     session: async (_, { id }, context) => {
+      if (!context.user) throw new Error("Unauthorized");
       return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions/${id}`);
     },
     myNotifications: async (_, __, context) => {
@@ -205,9 +208,13 @@ const resolvers = {
     },
     updateProfile: async (_, args, context) => {
       if (!context.user) throw new Error("Unauthorized");
+      if (args.studyPace) args.studyPace = args.studyPace.toUpperCase();
+      if (args.studyMode) args.studyMode = args.studyMode.toUpperCase();
+      if (args.studyStyle) args.studyStyle = args.studyStyle.toUpperCase();
       return reqWithAuth(context, 'PUT', `${PROFILE_URL}/profile/${context.user.id}`, args);
     },
     createAvailability: async (_, args, context) => {
+      if (args.dayOfWeek) args.dayOfWeek = args.dayOfWeek.toUpperCase();
       return reqWithAuth(context, 'POST', `${AVAILABILITY_URL}/availability`, args);
     },
     deleteAvailability: async (_, { id }, context) => {
@@ -215,6 +222,7 @@ const resolvers = {
       return true;
     },
     createSession: async (_, args, context) => {
+      if (args.sessionType) args.sessionType = args.sessionType.toUpperCase();
       return reqWithAuth(context, 'POST', `${SESSION_URL}/sessions`, args);
     },
     joinSession: async (_, { id }, context) => {

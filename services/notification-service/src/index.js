@@ -85,12 +85,31 @@ const handleKafkaEvent = async (eventName, payload) => {
         }
         break;
       case TOPICS.SESSION_CANCELLED:
-        // Assume we don't know participants list in the payload directly. In a real system, session-service might broadcast the list of userIds
-        // We will just alert the creator if they cancelled, or we rely on the payload containing { userId, ... }
-        if (payload.creatorId) {
-            await prisma.notification.create({
-              data: { userId: payload.creatorId, type: 'SESSION', title: 'Session Cancelled', body: `Your session was cancelled.` }
+        // Notify all participants (payload.participantIds) if provided, otherwise just the creator
+        if (payload.participantIds && Array.isArray(payload.participantIds) && payload.participantIds.length > 0) {
+          const recipientIds = payload.participantIds.filter(id => id !== payload.creatorId);
+          if (recipientIds.length > 0) {
+            await prisma.notification.createMany({
+              data: recipientIds.map(userId => ({
+                userId,
+                type: 'SESSION',
+                title: 'Session Cancelled',
+                body: `A session you joined has been cancelled.`
+              }))
             });
+          }
+        }
+        if (payload.creatorId) {
+          await prisma.notification.create({
+            data: { userId: payload.creatorId, type: 'SESSION', title: 'Session Cancelled', body: `Your session was cancelled.` }
+          });
+        }
+        break;
+      case TOPICS.MESSAGE_SENT:
+        if (payload.recipientId) {
+          await prisma.notification.create({
+            data: { userId: payload.recipientId, type: 'MESSAGE', title: 'New Message', body: `You have a new message.` }
+          });
         }
         break;
     }
@@ -102,19 +121,18 @@ const handleKafkaEvent = async (eventName, payload) => {
 const startServer = async () => {
   try {
     kafkaConsumer = createConsumer('notification-service-group');
-    // await kafkaConsumer.connect();
-    // await kafkaConsumer.subscribe({ topic: TOPICS.MATCH_FOUND, fromBeginning: true });
-    // await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_JOINED, fromBeginning: true });
-    // await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_CANCELLED, fromBeginning: true });
+    await kafkaConsumer.connect();
+    await kafkaConsumer.subscribe({ topic: TOPICS.MATCH_FOUND, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_JOINED, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.SESSION_CANCELLED, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.MESSAGE_SENT, fromBeginning: true });
     
-    /*
     await kafkaConsumer.run({
       eachMessage: async ({ topic, partition, message }) => {
         const msg = JSON.parse(message.value.toString());
         await handleKafkaEvent(msg.eventName, msg.payload);
       }
     });
-    */
 
     app.listen(PORT, () => console.log(`Notification Service listening on port ${PORT}`));
   } catch (error) {
@@ -127,9 +145,11 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
+  if (kafkaConsumer) await kafkaConsumer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
+  if (kafkaConsumer) await kafkaConsumer.disconnect();
   process.exit(0);
 });

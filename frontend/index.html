@@ -11,6 +11,11 @@
 /* ════════════════════════════════════════════════════════════════
    ROOT VARIABLES & RESET
 ════════════════════════════════════════════════════════════════ */
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
 :root{
   --ink:#02040a;
   --ink2:#060c18;
@@ -168,7 +173,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 .nav-logo{
   font-size:22px;font-weight:800;letter-spacing:-0.5px;
   background:linear-gradient(135deg,var(--neo),var(--neo3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   cursor:pointer;margin-right:40px;flex-shrink:0;
   filter:drop-shadow(0 0 12px rgba(0,255,255,0.4));
 }
@@ -226,11 +231,11 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 .mono{font-family:var(--mono);font-size:12px;color:var(--text3);letter-spacing:.5px}
 
 /* Gradient text helpers */
-.t-neo{background:linear-gradient(135deg,var(--neo),var(--neo2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(0,255,255,0.4))}
-.t-purple{background:linear-gradient(135deg,var(--neo3),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t-pink{background:linear-gradient(135deg,var(--neo4),#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t-green{background:linear-gradient(135deg,var(--neo5),#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t-multi{background:linear-gradient(135deg,var(--neo),var(--neo3),var(--neo4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t-neo{background:linear-gradient(135deg,var(--neo),var(--neo2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(0,255,255,0.4))}
+.t-purple{background:linear-gradient(135deg,var(--neo3),#c084fc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-pink{background:linear-gradient(135deg,var(--neo4),#fb923c);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-green{background:linear-gradient(135deg,var(--neo5),#6ee7b7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-multi{background:linear-gradient(135deg,var(--neo),var(--neo3),var(--neo4));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 /* ════════════════════════════════════════════════════════════════
    BUTTONS
@@ -332,6 +337,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
   font-family:var(--font);font-size:14px;outline:none;
   width:100%;cursor:pointer;
   -webkit-appearance:none;
+  appearance:none;
   transition:all .2s;
 }
 .select:focus{border-color:rgba(0,255,255,0.5);box-shadow:0 0 0 3px rgba(0,255,255,0.08)}
@@ -496,8 +502,8 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
   to{opacity:1;transform:translateX(0)}
 }
 @keyframes shimmer{
-  0%{background-position:200% 0}
-  100%{background-position:-200% 0}
+  0%{background-position:0% 50%}
+  100%{background-position:100% 50%}
 }
 @keyframes spin{
   to{transform:rotate(360deg)}
@@ -984,9 +990,9 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
   <nav class="landing-nav">
     <button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button>
     <div style="display:flex;gap:28px;font-size:14px;color:var(--text2)">
-      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">Features</span>
-      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">How it Works</span>
-      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">About</span>
+      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2)'}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2)'" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">Features</span>
+      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2)'}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2)'" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">How it Works</span>
+      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2)'}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2)'" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">About</span>
     </div>
     <div style="display:flex;gap:10px">
       <button class="btn btn-ghost btn-sm" onclick="go('login')">Sign in</button>
@@ -1145,22 +1151,22 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
       <div class="glass-heavy" style="padding:36px">
         <div style="display:flex;flex-direction:column;gap:20px">
           <div class="form-row">
-            <div><label class="input-label">First Name<input class="input" type="text" placeholder="Ahmed"/></label></div>
-            <div><label class="input-label">Last Name<input class="input" type="text" placeholder="Hassan"/></label></div>
+            <div><label class="input-label" for="reg-first-name"><span>First Name</span><input class="input" id="reg-first-name" type="text" placeholder="Ahmed"/></label></div>
+            <div><label class="input-label" for="reg-last-name"><span>Last Name</span><input class="input" id="reg-last-name" type="text" placeholder="Hassan"/></label></div>
           </div>
-          <div><label class="input-label">University Email<input class="input" type="email" placeholder="ahmed@giu-uni.de"/></label></div>
+          <div><label class="input-label" for="reg-email"><span>University Email</span><input class="input" id="reg-email" type="email" placeholder="ahmed@giu-uni.de"/></label></div>
           <div class="form-row">
-            <div><label class="input-label">University<input class="input" type="text" placeholder="GIU Cairo"/></label></div>
-            <div><label class="input-label">Major<input class="input" type="text" placeholder="CS"/></label></div>
+            <div><label class="input-label" for="reg-university"><span>University</span><input class="input" id="reg-university" type="text" placeholder="GIU Cairo"/></label></div>
+            <div><label class="input-label" for="reg-major"><span>Major</span><input class="input" id="reg-major" type="text" placeholder="CS"/></label></div>
           </div>
           <div class="form-row">
-            <div><label class="input-label">Academic Year
-              <select class="select"><option>Year 1</option><option>Year 2</option><option selected>Year 3</option><option>Year 4</option></select></label>
+            <div><label class="input-label" for="reg-year"><span>Academic Year</span>
+              <select class="select" id="reg-year"><option>Year 1</option><option>Year 2</option><option selected>Year 3</option><option>Year 4</option></select></label>
             </div>
-            <div><label class="input-label">Phone<input class="input" type="text" placeholder="+20 1XX XXX XXXX"/></label></div>
+            <div><label class="input-label" for="reg-phone"><span>Phone</span><input class="input" id="reg-phone" type="text" placeholder="+20 1XX XXX XXXX"/></label></div>
           </div>
-          <div><label class="input-label">Password<input class="input" type="password" placeholder="••••••••"/></label></div>
-          <div><label class="input-label">Confirm Password<input class="input" type="password" placeholder="••••••••"/></label></div>
+          <div><label class="input-label" for="reg-password"><span>Password</span><input class="input" id="reg-password" type="password" placeholder="••••••••"/></label></div>
+          <div><label class="input-label" for="reg-confirm-password"><span>Confirm Password</span><input class="input" id="reg-confirm-password" type="password" placeholder="••••••••"/></label></div>
           <button class="btn btn-primary w-full" style="justify-content:center;margin-top:8px" onclick="handleRegister()">Create Account →</button>
           <div style="text-align:center;font-size:14px;color:var(--text2)">Already have an account? <span style="color:var(--neo);cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){go('login')}" onclick="go('login')">Sign in</span></div>
         </div>
@@ -1181,8 +1187,8 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
       </div>
       <div class="glass-heavy" style="padding:36px">
         <div style="display:flex;flex-direction:column;gap:20px">
-          <div><label class="input-label">Email<input class="input" type="email" value="ahmed@giu-uni.de"/></label></div>
-          <div><label class="input-label">Password<input class="input" type="password" value="password123"/></label></div>
+          <div><label class="input-label" for="login-email"><span>Email</span><input class="input" id="login-email" type="email" value="ahmed@giu-uni.de"/></label></div>
+          <div><label class="input-label" for="login-password"><span>Password</span><input class="input" id="login-password" type="password" value="password123"/></label></div>
           <div style="display:flex;justify-content:space-between;font-size:13px">
             <label style="display:flex;gap:8px;align-items:center;cursor:pointer;color:var(--text2)">
               <input type="checkbox" checked style="accent-color:var(--neo)" id="remember-me"/> Remember me
@@ -1219,7 +1225,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
       </div>
       <div class="glass" style="padding:36px">
         <div style="display:flex;flex-direction:column;gap:22px">
-          <div><label class="input-label">Bio / About You<textarea class="textarea" placeholder="I'm a 3rd year CS student passionate about algorithms and ML. I prefer collaborative study sessions where we discuss concepts out loud..."></textarea></label>
+          <div><label class="input-label" for="setup-bio"><span>Bio / About You</span><textarea class="textarea" id="setup-bio" placeholder="I'm a 3rd year CS student passionate about algorithms and ML. I prefer collaborative study sessions where we discuss concepts out loud..."></textarea></label>
           </div>
           <div>
             <label class="input-label">Current Courses</label>
@@ -1248,12 +1254,12 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
             </div>
           </div>
           <div class="form-row">
-            <div><label class="input-label">University<input class="input" value="German International University"/></label></div>
-            <div><label class="input-label">Academic Year<select class="select"><option>Year 1</option><option>Year 2</option><option selected>Year 3</option><option>Year 4</option></select></label></div>
+            <div><label class="input-label" for="setup-university"><span>University</span><input class="input" id="setup-university" value="German International University"/></label></div>
+            <div><label class="input-label" for="setup-year"><span>Academic Year</span><select class="select" id="setup-year"><option>Year 1</option><option>Year 2</option><option selected>Year 3</option><option>Year 4</option></select></label></div>
           </div>
           <div class="form-row">
-            <div><label class="input-label">Contact Email<input class="input" type="email" value="ahmed@giu-uni.de"/></label></div>
-            <div><label class="input-label">Phone (optional)<input class="input" type="text" placeholder="+20 1XX XXX XXXX"/></label></div>
+            <div><label class="input-label" for="setup-email"><span>Contact Email</span><input class="input" id="setup-email" type="email" value="ahmed@giu-uni.de"/></label></div>
+            <div><label class="input-label" for="setup-phone"><span>Phone (optional)</span><input class="input" id="setup-phone" type="text" placeholder="+20 1XX XXX XXXX"/></label></div>
           </div>
           <div style="display:flex;gap:12px;margin-top:8px">
             <button class="btn btn-ghost" onclick="go('register')">← Back</button>
@@ -1880,13 +1886,13 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
       <p style="color:var(--text2);font-weight:300;margin-bottom:28px">Set up a new session and invite your study buddies.</p>
       <div class="glass-heavy" style="padding:36px">
         <div style="display:flex;flex-direction:column;gap:20px">
-          <div><label class="input-label">Session Topic / Title<input class="input" type="text" placeholder="e.g. Algorithms — Dynamic Programming Review"/></label></div>
-          <div><label class="input-label">Course<select class="select"><option>Algorithms</option><option>Data Structures</option><option>Discrete Mathematics</option><option>Operating Systems</option></select></label></div>
+          <div><label class="input-label" for="session-title"><span>Session Topic / Title</span><input class="input" id="session-title" type="text" placeholder="e.g. Algorithms — Dynamic Programming Review"/></label></div>
+          <div><label class="input-label" for="session-course"><span>Course</span><select class="select" id="session-course"><option>Algorithms</option><option>Data Structures</option><option>Discrete Mathematics</option><option>Operating Systems</option></select></label></div>
           <div class="form-row">
-            <div><label class="input-label">Date<input class="input" type="date" value="2026-03-20"/></label></div>
-            <div><label class="input-label">Start Time<input class="input" type="time" value="14:00"/></label></div>
+            <div><label class="input-label" for="session-date"><span>Date</span><input class="input" id="session-date" type="date" value="2026-03-20"/></label></div>
+            <div><label class="input-label" for="session-time"><span>Start Time</span><input class="input" id="session-time" type="time" value="14:00"/></label></div>
           </div>
-          <div><label class="input-label">Duration<select class="select"><option>1 hour</option><option selected>2 hours</option><option>3 hours</option><option>4 hours</option></select></label></div>
+          <div><label class="input-label" for="session-duration"><span>Duration</span><select class="select" id="session-duration"><option>1 hour</option><option selected>2 hours</option><option>3 hours</option><option>4 hours</option></select></label></div>
           <!-- Session Type -->
           <div>
             <label class="input-label">Session Type</label>
@@ -1895,8 +1901,8 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
               <div class="pref-card" id="type-inperson" onclick="pickSessionType('inperson')"><span class="pref-emoji">🏛️</span><div class="pref-label">In-Person</div><div class="pref-sub">Campus / study rooms</div></div>
             </div>
           </div>
-          <div id="f-online"><label class="input-label">Meeting Link</label><input class="input" type="text" placeholder="https://meet.google.com/xyz-abc-def"/></div>
-          <div id="f-location" style="display:none"><label class="input-label">Room / Location</label><input class="input" type="text" placeholder="Study Room 204, GIU Campus"/></div>
+          <div id="f-online"><label class="input-label" for="session-link"><span>Meeting Link</span><input class="input" id="session-link" type="text" placeholder="https://meet.google.com/xyz-abc-def"/></label></div>
+          <div id="f-location" style="display:none"><label class="input-label" for="session-location"><span>Room / Location</span><input class="input" id="session-location" type="text" placeholder="Study Room 204, GIU Campus"/></label></div>
           <!-- Invite -->
           <div>
             <label class="input-label">Invite Study Buddies</label>
@@ -1913,7 +1919,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
               </label>
             </div>
           </div>
-          <div><label class="input-label">Notes (optional)<textarea class="textarea" placeholder="Topics to cover, what to prepare..."></textarea></label></div>
+          <div><label class="input-label" for="session-notes"><span>Notes (optional)</span><textarea class="textarea" id="session-notes" placeholder="Topics to cover, what to prepare..."></textarea></label></div>
           <!-- Contact Info -->
           <div style="padding:14px 16px;background:rgba(0,255,255,0.04);border:1px solid rgba(0,255,255,0.15);border-radius:10px;font-size:13px;color:var(--text2)">
             💡 Your contact info (ahmed@giu-uni.de) will be shared with participants so they can reach you if the messaging service is unavailable.
@@ -2115,19 +2121,19 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
               <div style="font-size:16px;font-weight:700;margin-bottom:20px">Personal Information</div>
               <div style="display:flex;flex-direction:column;gap:18px">
                 <div class="form-row">
-                  <div><label class="input-label">First Name<input class="input" value="Ahmed"/></label></div>
-                  <div><label class="input-label">Last Name<input class="input" value="Hassan"/></label></div>
+                  <div><label class="input-label" for="profile-first-name"><span>First Name</span><input class="input" id="profile-first-name" value="Ahmed"/></label></div>
+                  <div><label class="input-label" for="profile-last-name"><span>Last Name</span><input class="input" id="profile-last-name" value="Hassan"/></label></div>
                 </div>
                 <div class="form-row">
-                  <div><label class="input-label">Email<input class="input" value="ahmed@giu-uni.de"/></label></div>
-                  <div><label class="input-label">Phone<input class="input" value="+20 100 123 4567"/></label></div>
+                  <div><label class="input-label" for="profile-email"><span>Email</span><input class="input" id="profile-email" value="ahmed@giu-uni.de"/></label></div>
+                  <div><label class="input-label" for="profile-phone"><span>Phone</span><input class="input" id="profile-phone" value="+20 100 123 4567"/></label></div>
                 </div>
                 <div class="form-row">
-                  <div><label class="input-label">University<input class="input" value="German International University"/></label></div>
-                  <div><label class="input-label">Year<select class="select"><option>Year 3</option></select></label></div>
+                  <div><label class="input-label" for="profile-university"><span>University</span><input class="input" id="profile-university" value="German International University"/></label></div>
+                  <div><label class="input-label" for="profile-year"><span>Year</span><select class="select" id="profile-year"><option>Year 3</option></select></label></div>
                 </div>
-                <div><label class="input-label">Bio<textarea class="textarea">3rd year CS student passionate about algorithms and collaborative learning.</textarea></label></div>
-                <button class="btn btn-primary" onclick="toast('Profile updated! Kafka event published.','success')">Save Changes</button>
+                <div><label class="input-label" for="profile-bio"><span>Bio</span><textarea class="textarea" id="profile-bio">3rd year CS student passionate about algorithms and collaborative learning.</textarea></label></div>
+                <button class="btn btn-primary" onclick="saveProfileInfo()">Save Changes</button>
               </div>
             </div>
           </div>
@@ -2160,7 +2166,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
                     <div class="pref-card" onclick="this.classList.toggle('on')"><span class="pref-emoji">🔇</span><div class="pref-label">Quiet</div></div>
                   </div>
                 </div>
-                <button class="btn btn-primary" onclick="toast('Preferences saved! Re-running match algorithm...','success')">Save Preferences</button>
+                <button class="btn btn-primary" onclick="savePreferences()">Save Preferences</button>
               </div>
             </div>
           </div>
@@ -2185,7 +2191,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
                 <div class="chip on" onclick="toggleChip(this)">Recursion</div>
                 <div class="chip" onclick="toggleChip(this)">Tree Algorithms</div>
               </div>
-              <button class="btn btn-primary" onclick="toast('Courses updated! Re-matching...','success')">Update Courses</button>
+              <button class="btn btn-primary" onclick="updateCourses()">Update Courses</button>
             </div>
           </div>
           <!-- History -->
@@ -2342,12 +2348,76 @@ window.addEventListener('load',()=>{
 });
 
 /* ── AUTH ── */
-function handleLogin(){toast('Authenticating via GraphQL...','info');setTimeout(()=>{go('dashboard');toast('Welcome back, Ahmed! 👋','success')},700)}
-function handleRegister(){toast('Creating account via GraphQL...','info');setTimeout(()=>{go('profile-setup');toast('Account created! Set up your profile.','success')},700)}
-function finishSetup(){toast('Profile complete! Running matching engine...','success');setTimeout(()=>go('dashboard'),800)}
-function doLogout(){go('landing');toast('Signed out successfully','info')}
+async function handleLogin(){
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-password').value;
+  if(!email || !pass) return toast('Please enter email and password','error');
+  
+  toast('Authenticating...','info');
+  const query = `mutation($email:String!,$pass:String!){ login(email:$email,password:$pass){ token userId } }`;
+  const res = await gql(query, { email, pass });
+  if(res.data && res.data.login) {
+    localStorage.setItem('studySyncToken', res.data.login.token);
+    localStorage.setItem('studySyncUserId', res.data.login.userId);
+    toast('Welcome back! 👋','success');
+    go('dashboard');
+  }
+}
+async function handleRegister(){
+  const fName = document.getElementById('reg-first-name').value;
+  const lName = document.getElementById('reg-last-name').value;
+  const email = document.getElementById('reg-email').value;
+  const pass = document.getElementById('reg-password').value;
+  if(!fName || !email || !pass) return toast('Required fields missing','error');
+
+  toast('Creating account...','info');
+  const name = fName + ' ' + lName;
+  const query = `mutation($e:String!,$p:String!,$n:String!){ register(email:$e,password:$p,name:$n){ id } }`;
+  const res = await gql(query, { e:email, p:pass, n:name });
+  if(res.data && res.data.register) {
+    toast('Account created! Let\'s set up your profile.','success');
+    const lQuery = `mutation($e:String!,$p:String!){ login(email:$e,password:$p){ token userId } }`;
+    const lRes = await gql(lQuery, { e:email, p:pass });
+    if(lRes.data && lRes.data.login) {
+      localStorage.setItem('studySyncToken', lRes.data.login.token);
+      localStorage.setItem('studySyncUserId', lRes.data.login.userId);
+      go('profile-setup');
+    }
+  }
+}
+async function finishSetup(){
+  toast('Verifying profile...','info');
+  // Simple check to ensure everything is initialized
+  await saveProfileInfo(); 
+  toast('Profile complete! Running matching engine...','success');
+  setTimeout(()=>go('dashboard'),800);
+}
+function doLogout(){
+  localStorage.removeItem('studySyncToken');
+  localStorage.removeItem('studySyncUserId');
+  go('landing');
+  toast('Signed out successfully','info');
+}
 
 /* ── CHIPS / PREFS ── */
+async function saveProfileInfo(){
+  const courses = Array.from(document.querySelectorAll('#ptab-courses .chip.on')).map(c => c.textContent);
+  const topics = Array.from(document.querySelectorAll('#ptab-courses div:nth-child(4) .chip.on')).map(c => c.textContent);
+  
+  const getOn = (id) => { const el = document.querySelector(`#${id} .pref-card.on`); return el ? el.querySelector('.pref-label').textContent : ''; };
+  const studyPace = getOn('ptab-prefs');
+  const studyMode = document.querySelector('#ptab-prefs div:nth-child(2) .pref-card.on') ? document.querySelector('#ptab-prefs div:nth-child(2) .pref-card.on .pref-label').textContent : 'Online';
+  const studyStyle = Array.from(document.querySelectorAll('#ptab-prefs div:nth-child(3) .pref-card.on')).map(c => c.querySelector('.pref-label').textContent).join(', ');
+
+  const query = `mutation($c:[String],$t:[String],$p:String,$m:String,$s:String){ 
+    updateProfile(courses:$c, topics:$t, studyPace:$p, studyMode:$m, studyStyle:$s){ id } 
+  }`;
+  const res = await gql(query, { c:courses, t:topics, p:studyPace, m:studyMode, s:studyStyle });
+  if(res.data) toast('Profile updated successfully!','success');
+}
+async function savePreferences(){ await saveProfileInfo(); }
+async function updateCourses(){ await saveProfileInfo(); }
+
 function toggleChip(el){el.classList.toggle('on')}
 function stopProp(e){e.stopPropagation()}
 function pickPref(g,el){el.parentElement.querySelectorAll('.pref-card').forEach(c=>c.classList.remove('on'));el.classList.add('on')}
@@ -2392,23 +2462,85 @@ function buildAvailGrid(){
   });
   g.innerHTML=h;updateAvailCount();
 }
-function toggleAvail(el){el.classList.toggle('on');updateAvailCount()}
+function toggleAvail(el){
+  el.classList.toggle('on');
+  updateAvailCount();
+  if(el.classList.contains('on')){
+    const idx = Array.from(el.parentElement.children).indexOf(el);
+    const dayNames = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+    const dayIdx = (idx % 8) - 1;
+    const timeIdx = Math.floor(idx / 8);
+    if(dayIdx >= 0){
+      const day = dayNames[dayIdx];
+      const start = (8 + timeIdx) + ':00';
+      const end = (9 + timeIdx) + ':00';
+      gql(`mutation($d:String!,$s:String!,$e:String!){ createAvailability(dayOfWeek:$d,startTime:$s,endTime:$e){ id } }`, {d:day, s:start, e:end});
+    }
+  }
+}
 function updateAvailCount(){
   const n=document.querySelectorAll('.avail-cell.on:not(.hdr)').length;
   const el=document.getElementById('avail-count');if(el)el.textContent=n+' slot'+(n!==1?'s':'')+' selected';
 }
-function availClear(){document.querySelectorAll('.avail-cell:not(.hdr)').forEach(c=>c.classList.remove('on'));updateAvailCount()}
-function availMornings(){availClear();document.querySelectorAll('.avail-cell:not(.hdr)').forEach((c,i)=>{if(Math.floor(i/7)<=3)c.classList.add('on')});updateAvailCount()}
-function availAfternoons(){availClear();document.querySelectorAll('.avail-cell:not(.hdr)').forEach((c,i)=>{const r=Math.floor(i/7);if(r>=4&&r<=7)c.classList.add('on')});updateAvailCount()}
-
-/* ── MESSAGES ── */
+async function loadMatches(){
+  const res = await gql(`{ myMatches { userId1 userId2 score reasons } }`);
+  if(res.data && res.data.myMatches){
+    const grid = document.querySelector('.match-grid');
+    if(!grid) return;
+    grid.innerHTML = res.data.myMatches.map(m => `
+      <div class="glass card-3d" style="padding:22px">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div class="match-avatar">👤</div>
+          <div class="match-score">${m.score}%</div>
+        </div>
+        <div style="margin:16px 0 6px;font-weight:700">Study Buddy Candidate</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px">${m.reasons.join(' · ')}</div>
+        <button class="btn btn-primary btn-sm" onclick="sendReq('Buddy')">Connect</button>
+      </div>
+    `).join('');
+  }
+}
+async function loadSessions(){
+  const res = await gql(`{ sessions { id title topic dateTime duration sessionType creatorId participants { userId } } }`);
+  if(res.data && res.data.sessions){
+    const grid = document.querySelector('#tb-explore');
+    if(!grid) return;
+    grid.innerHTML = res.data.sessions.map(s => `
+      <div class="glass card-3d" style="padding:22px">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div class="session-badge">${s.sessionType}</div>
+          <div class="session-date">${new Date(s.dateTime).toLocaleDateString()}</div>
+        </div>
+        <div style="margin:16px 0 6px;font-weight:700">${s.title}</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px">${s.topic} · ${s.duration} mins</div>
+        <button class="btn btn-primary btn-sm" onclick="joinSess('${s.id}')">Join Session</button>
+      </div>
+    `).join('');
+  }
+}
+window.addEventListener('load',()=>{
+  buildAvailGrid();
+  go('landing');
+  setInterval(() => {
+    loadMatches();
+    loadSessions();
+  }, 30000);
+});
 function sendMsg(){
   const input=document.getElementById('msg-in');
   const txt=input.value.trim();if(!txt)return;
   const c=document.getElementById('chat-msgs');
   const d=document.createElement('div');
   d.style.cssText='display:flex;flex-direction:column;gap:3px;align-items:flex-end';
-  d.innerHTML=`<div class="bubble me">${txt}</div><div class="bubble-time" style="text-align:right">Now</div>`;
+  const bubble=document.createElement('div');
+  bubble.className='bubble me';
+  bubble.textContent=txt;
+  const time=document.createElement('div');
+  time.className='bubble-time';
+  time.style.textAlign='right';
+  time.textContent='Now';
+  d.appendChild(bubble);
+  d.appendChild(time);
   c.appendChild(d);c.scrollTop=c.scrollHeight;input.value='';
   setTimeout(()=>{
     const r=document.createElement('div');
@@ -2421,9 +2553,45 @@ function sendMsg(){
 /* ── ACTIONS ── */
 function sendReq(n){toast(`Buddy request sent to ${n} via GraphQL 👋`,'success')}
 function acceptReq(n){toast(`Connected with ${n}! 🎉`,'success')}
-function createSession(){toast('Session created! Kafka event published & invitations sent','success');setTimeout(()=>go('sessions'),800)}
+async function createSession(){
+  const title = document.getElementById('s-title').value;
+  const topic = document.getElementById('s-topic').value;
+  const date = document.getElementById('s-date').value;
+  const duration = parseInt(document.getElementById('s-duration').value);
+  const type = document.getElementById('type-online').classList.contains('on') ? 'ONLINE' : 'INPERSON';
+  
+  const query = `mutation($t:String!,$tp:String!,$d:String!,$du:Int!,$st:String!,$mp:Int!){
+    createSession(title:$t, topic:$tp, dateTime:$d, duration:$du, sessionType:$st, maxParticipants:$mp){ id }
+  }`;
+  const res = await gql(query, { t:title, tp:topic, d:date, du:duration, st:type, mp:5 });
+  if(res.data){
+    toast('Session created! Kafka event published & invitations sent','success');
+    go('sessions');
+  }
+}
+async function joinSess(id){
+  const res = await gql(`mutation($id:ID!){ joinSession(id:$id){ id } }`, { id });
+  if(res.data) toast('Joined session successfully! 🎉','success');
+}
 function markAllRead(){document.querySelectorAll('.notif-item.unread').forEach(el=>el.classList.remove('unread'));toast('All notifications marked as read','info')}
 function markOneRead(btn){const el=btn.closest('.notif-item');if(el){el.classList.remove('unread');el.style.opacity='.5'}}
+
+/* ── RENDER NOTIFICATIONS ── */
+function renderNotifications(notifications){
+  const list=document.getElementById('notif-list');
+  const dot=document.querySelector('.nav-notif .dot');
+  if(!list)return;
+  list.innerHTML='';
+  const unread=notifications.filter(n=>!n.read);
+  if(dot)dot.style.display=unread.length?'block':'none';
+  notifications.forEach(n=>{
+    const el=document.createElement('div');
+    el.className='notif-item'+(n.read?'':' unread');
+    el.style.padding='20px 24px';
+    el.innerHTML=`<div class="notif-ico" style="background:rgba(100,160,255,0.1)">🔔</div><div style="flex:1"><div style="font-size:15px;font-weight:700">${n.type||'Notification'}</div><p style="font-size:13px;color:var(--text2);margin-top:5px">${n.message||''}</p></div>`;
+    list.appendChild(el);
+  });
+}
 
 /* ── TOAST ── */
 function toast(msg,type='info'){
@@ -2470,8 +2638,11 @@ async function gql(query, variables={}) {
     }
     return json;
   } catch (err) {
-    if (err.message !== 'Failed to fetch') console.error(err);
-    else toast('Could not connect to Gateway!', 'error');
+    if (err.name === 'TypeError') {
+      toast('Could not connect to Gateway!', 'error');
+    } else {
+      console.error(err);
+    }
     return { data: null, error: err.message };
   }
 }
@@ -2480,7 +2651,10 @@ async function gql(query, variables={}) {
 setInterval(async () => {
   const token = localStorage.getItem('studySyncToken');
   if(token && document.getElementById('pg-notifications').classList.contains('active')) {
-     // Fetch notifications logic via gql
+    const data = await gql(`{ myNotifications { id type title body isRead createdAt } }`);
+    if(data && data.data && data.data.myNotifications) {
+      renderNotifications(data.data.myNotifications.map(n => ({ type: n.type, message: n.body, read: n.isRead })));
+    }
   }
 }, 15000);
 </script>

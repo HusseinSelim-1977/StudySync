@@ -138,13 +138,19 @@ app.delete('/sessions/:id/leave', authenticateToken, async (req, res) => {
         data: { status: 'CANCELLED' }
       });
 
+      // Fetch participant IDs to notify them
+      const participants = await prisma.sessionParticipant.findMany({ where: { sessionId } });
+      const participantIds = participants.map(p => p.userId);
+
       try {
-        const msg = formatMessage(TOPICS.SESSION_CANCELLED, 'session-service', { sessionId, creatorId: userId });
+        const msg = formatMessage(TOPICS.SESSION_CANCELLED, 'session-service', { sessionId, creatorId: userId, participantIds });
         await kafkaProducer.send({
           topic: TOPICS.SESSION_CANCELLED,
           messages: [{ value: JSON.stringify(msg) }]
         });
-      } catch (err) { }
+      } catch (err) {
+        console.error('Failed to dispatch SESSION_CANCELLED', err);
+      }
       return res.json({ message: 'Session cancelled' });
     } else {
       // Normal participant deletes their joined record
@@ -173,11 +179,11 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
-  await kafkaProducer.disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
-  await kafkaProducer.disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
   process.exit(0);
 });

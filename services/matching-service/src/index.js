@@ -177,18 +177,17 @@ app.get('/matches/:userId', authenticateToken, async (req, res) => {
 const startServer = async () => {
   try {
     kafkaProducer = createProducer('matching-service');
-    // await kafkaProducer.connect();
+    await kafkaProducer.connect();
 
     kafkaConsumer = createConsumer('matching-service-group');
-    // await kafkaConsumer.connect();
+    await kafkaConsumer.connect();
     
-    // await kafkaConsumer.subscribe({ topic: TOPICS.PREFERENCES_UPDATED, fromBeginning: true });
-    // await kafkaConsumer.subscribe({ topic: TOPICS.AVAILABILITY_UPDATED, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.PREFERENCES_UPDATED, fromBeginning: true });
+    await kafkaConsumer.subscribe({ topic: TOPICS.AVAILABILITY_UPDATED, fromBeginning: true });
     
-    /* 
     await kafkaConsumer.run({
       autoCommit: false,
-      eachMessage: async ({ topic, partition, message, heartbeat, pause }) => {
+      eachMessage: async ({ topic, partition, message }) => {
         const msg = JSON.parse(message.value.toString());
         const { eventName, payload } = msg;
 
@@ -215,7 +214,6 @@ const startServer = async () => {
         }
       }
     });
-    */
 
     app.listen(PORT, () => console.log(`Matching Service listening on port ${PORT}`));
   } catch (error) {
@@ -228,9 +226,13 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
+  if (kafkaConsumer) await kafkaConsumer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
+  if (kafkaConsumer) await kafkaConsumer.disconnect();
   process.exit(0);
 });

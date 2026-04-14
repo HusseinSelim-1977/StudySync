@@ -87,11 +87,11 @@ startServer();
 
 process.on('SIGINT', async () => {
   await prisma.$disconnect();
-  await kafkaProducer.disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
   process.exit(0);
 });
 process.on('SIGTERM', async () => {
   await prisma.$disconnect();
-  await kafkaProducer.disconnect();
+  if (kafkaProducer) await kafkaProducer.disconnect();
   process.exit(0);
 });
