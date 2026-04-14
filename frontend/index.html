@@ -168,7 +168,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 .nav-logo{
   font-size:22px;font-weight:800;letter-spacing:-0.5px;
   background:linear-gradient(135deg,var(--neo),var(--neo3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   cursor:pointer;margin-right:40px;flex-shrink:0;
   filter:drop-shadow(0 0 12px rgba(0,255,255,0.4));
 }
@@ -226,11 +226,11 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
 .mono{font-family:var(--mono);font-size:12px;color:var(--text3);letter-spacing:.5px}
 
 /* Gradient text helpers */
-.t-neo{background:linear-gradient(135deg,var(--neo),var(--neo2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(0,255,255,0.4))}
-.t-purple{background:linear-gradient(135deg,var(--neo3),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t-pink{background:linear-gradient(135deg,var(--neo4),#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t-green{background:linear-gradient(135deg,var(--neo5),#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t-multi{background:linear-gradient(135deg,var(--neo),var(--neo3),var(--neo4));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t-neo{background:linear-gradient(135deg,var(--neo),var(--neo2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(0,255,255,0.4))}
+.t-purple{background:linear-gradient(135deg,var(--neo3),#c084fc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-pink{background:linear-gradient(135deg,var(--neo4),#fb923c);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-green{background:linear-gradient(135deg,var(--neo5),#6ee7b7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.t-multi{background:linear-gradient(135deg,var(--neo),var(--neo3),var(--neo4));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 /* ════════════════════════════════════════════════════════════════
    BUTTONS
@@ -331,7 +331,7 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
   padding:12px 16px;color:var(--text);
   font-family:var(--font);font-size:14px;outline:none;
   width:100%;cursor:pointer;
-  -webkit-appearance:none;
+  -webkit-appearance:none;appearance:none;
   transition:all .2s;
 }
 .select:focus{border-color:rgba(0,255,255,0.5);box-shadow:0 0 0 3px rgba(0,255,255,0.08)}
@@ -984,9 +984,9 @@ body:has([onclick]:hover) #cursor-ring{width:56px;height:56px;border-color:rgba(
   <nav class="landing-nav">
     <button class="nav-logo" onclick="go('landing')" aria-label="StudySync Home">StudySync</button>
     <div style="display:flex;gap:28px;font-size:14px;color:var(--text2)">
-      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">Features</span>
-      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">How it Works</span>
-      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2')}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2')" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">About</span>
+      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2)'}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2)'" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">Features</span>
+      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2)'}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2)'" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">How it Works</span>
+      <span style="cursor:pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.style.color='var(--text)'}else if(event.key==='Escape'){this.style.color='var(--text2)'}" onfocus="this.style.color='var(--text)'" onblur="this.style.color='var(--text2)'" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text2)'">About</span>
     </div>
     <div style="display:flex;gap:10px">
       <button class="btn btn-ghost btn-sm" onclick="go('login')">Sign in</button>
