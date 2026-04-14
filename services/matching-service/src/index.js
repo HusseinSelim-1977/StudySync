@@ -187,7 +187,7 @@ const startServer = async () => {
     
     await kafkaConsumer.run({
       autoCommit: false,
-      eachMessage: async ({ topic, partition, message, heartbeat, pause }) => {
+      eachMessage: async ({ topic, partition, message }) => {
         const msg = JSON.parse(message.value.toString());
         const { eventName, payload } = msg;
 

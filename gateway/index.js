@@ -6,7 +6,7 @@ const cors = require('cors');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 
-const PORT = process.env.GATEWAY_PORT || 4000;
+const PORT = process.env.PORT || process.env.GATEWAY_PORT || 4000;
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
 // Service URLs (Docker compose network or localhost)
@@ -169,6 +169,7 @@ const resolvers = {
       return reqWithAuth(context, 'GET', `${MATCHING_URL}/matches/${context.user.id}`);
     },
     sessions: async (_, { topic, type }, context) => {
+      if (!context.user) throw new Error("Unauthorized");
       const params = new URLSearchParams();
       if (topic) params.set('topic', topic);
       if (type) params.set('type', type);
@@ -176,6 +177,7 @@ const resolvers = {
       return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions${qs ? '?' + qs : ''}`);
     },
     session: async (_, { id }, context) => {
+      if (!context.user) throw new Error("Unauthorized");
       return reqWithAuth(context, 'GET', `${SESSION_URL}/sessions/${id}`);
     },
     myNotifications: async (_, __, context) => {

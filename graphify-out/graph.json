@@ -1,0 +1,571 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "bug-condition.test.js",
+      "file_type": "code",
+      "source_file": "frontend\\tests\\bug-condition.test.js",
+      "source_location": "L1",
+      "id": "frontend_tests_bug_condition_test_js",
+      "community": 5,
+      "norm_label": "bug-condition.test.js"
+    },
+    {
+      "label": "setup.js",
+      "file_type": "code",
+      "source_file": "frontend\\tests\\setup.js",
+      "source_location": "L1",
+      "id": "frontend_tests_setup_js",
+      "community": 6,
+      "norm_label": "setup.js"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "gateway\\index.js",
+      "source_location": "L1",
+      "id": "gateway_index_js",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "reqWithAuth()",
+      "file_type": "code",
+      "source_file": "gateway\\index.js",
+      "source_location": "L138",
+      "id": "index_reqwithauth",
+      "community": 0,
+      "norm_label": "reqwithauth()"
+    },
+    {
+      "label": "startServer()",
+      "file_type": "code",
+      "source_file": "services\\user-service\\src\\index.js",
+      "source_location": "L133",
+      "id": "index_startserver",
+      "community": 0,
+      "norm_label": "startserver()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_availability_service_src_index_js",
+      "community": 3,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "authenticateToken()",
+      "file_type": "code",
+      "source_file": "services\\user-service\\src\\index.js",
+      "source_location": "L21",
+      "id": "index_authenticatetoken",
+      "community": 0,
+      "norm_label": "authenticatetoken()"
+    },
+    {
+      "label": "checkOverlap()",
+      "file_type": "code",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L30",
+      "id": "index_checkoverlap",
+      "community": 3,
+      "norm_label": "checkoverlap()"
+    },
+    {
+      "label": "publishUpdate()",
+      "file_type": "code",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L44",
+      "id": "index_publishupdate",
+      "community": 3,
+      "norm_label": "publishupdate()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_matching_service_src_index_js",
+      "community": 1,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "checkTimeOverlap()",
+      "file_type": "code",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L31",
+      "id": "index_checktimeoverlap",
+      "community": 1,
+      "norm_label": "checktimeoverlap()"
+    },
+    {
+      "label": "calculateMatchScore()",
+      "file_type": "code",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L47",
+      "id": "index_calculatematchscore",
+      "community": 1,
+      "norm_label": "calculatematchscore()"
+    },
+    {
+      "label": "runMatching()",
+      "file_type": "code",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L86",
+      "id": "index_runmatching",
+      "community": 1,
+      "norm_label": "runmatching()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\messaging-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_messaging_service_src_index_js",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\notification-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_notification_service_src_index_js",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "handleKafkaEvent()",
+      "file_type": "code",
+      "source_file": "services\\notification-service\\src\\index.js",
+      "source_location": "L69",
+      "id": "index_handlekafkaevent",
+      "community": 0,
+      "norm_label": "handlekafkaevent()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\profile-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_profile_service_src_index_js",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\session-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_session_service_src_index_js",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "services\\user-service\\src\\index.js",
+      "source_location": "L1",
+      "id": "services_user_service_src_index_js",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "smoke.js",
+      "file_type": "code",
+      "source_file": "shared\\smoke.js",
+      "source_location": "L1",
+      "id": "shared_smoke_js",
+      "community": 4,
+      "norm_label": "smoke.js"
+    },
+    {
+      "label": "runSmokeTest()",
+      "file_type": "code",
+      "source_file": "shared\\smoke.js",
+      "source_location": "L3",
+      "id": "smoke_runsmoketest",
+      "community": 4,
+      "norm_label": "runsmoketest()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L1",
+      "id": "shared_kafka_index_js",
+      "community": 2,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "createProducer()",
+      "file_type": "code",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L17",
+      "id": "index_createproducer",
+      "community": 2,
+      "norm_label": "createproducer()"
+    },
+    {
+      "label": "createConsumer()",
+      "file_type": "code",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L28",
+      "id": "index_createconsumer",
+      "community": 2,
+      "norm_label": "createconsumer()"
+    },
+    {
+      "label": "formatMessage()",
+      "file_type": "code",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L52",
+      "id": "index_formatmessage",
+      "community": 2,
+      "norm_label": "formatmessage()"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "gateway\\index.js",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_src": "gateway_index_js",
+      "_tgt": "index_reqwithauth",
+      "source": "gateway_index_js",
+      "target": "index_reqwithauth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "gateway\\index.js",
+      "source_location": "L245",
+      "weight": 1.0,
+      "_src": "gateway_index_js",
+      "_tgt": "index_startserver",
+      "source": "gateway_index_js",
+      "target": "index_startserver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_src": "services_availability_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_availability_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L177",
+      "weight": 1.0,
+      "_src": "services_matching_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_matching_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\messaging-service\\src\\index.js",
+      "source_location": "L163",
+      "weight": 1.0,
+      "_src": "services_messaging_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_messaging_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\notification-service\\src\\index.js",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_src": "services_notification_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_notification_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\profile-service\\src\\index.js",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_src": "services_profile_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_profile_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\session-service\\src\\index.js",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_src": "services_session_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_session_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\user-service\\src\\index.js",
+      "source_location": "L133",
+      "weight": 1.0,
+      "_src": "services_user_service_src_index_js",
+      "_tgt": "index_startserver",
+      "source": "index_startserver",
+      "target": "services_user_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "services_availability_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "services_availability_service_src_index_js",
+      "target": "index_authenticatetoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "services_availability_service_src_index_js",
+      "_tgt": "index_checkoverlap",
+      "source": "services_availability_service_src_index_js",
+      "target": "index_checkoverlap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\availability-service\\src\\index.js",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "services_availability_service_src_index_js",
+      "_tgt": "index_publishupdate",
+      "source": "services_availability_service_src_index_js",
+      "target": "index_publishupdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "services_matching_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "index_authenticatetoken",
+      "target": "services_matching_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\messaging-service\\src\\index.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "services_messaging_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "index_authenticatetoken",
+      "target": "services_messaging_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\notification-service\\src\\index.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "services_notification_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "index_authenticatetoken",
+      "target": "services_notification_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\profile-service\\src\\index.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "services_profile_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "index_authenticatetoken",
+      "target": "services_profile_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\session-service\\src\\index.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "services_session_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "index_authenticatetoken",
+      "target": "services_session_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\user-service\\src\\index.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "services_user_service_src_index_js",
+      "_tgt": "index_authenticatetoken",
+      "source": "index_authenticatetoken",
+      "target": "services_user_service_src_index_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "services_matching_service_src_index_js",
+      "_tgt": "index_checktimeoverlap",
+      "source": "services_matching_service_src_index_js",
+      "target": "index_checktimeoverlap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_src": "services_matching_service_src_index_js",
+      "_tgt": "index_calculatematchscore",
+      "source": "services_matching_service_src_index_js",
+      "target": "index_calculatematchscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_src": "services_matching_service_src_index_js",
+      "_tgt": "index_runmatching",
+      "source": "services_matching_service_src_index_js",
+      "target": "index_runmatching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_src": "index_calculatematchscore",
+      "_tgt": "index_checktimeoverlap",
+      "source": "index_checktimeoverlap",
+      "target": "index_calculatematchscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\matching-service\\src\\index.js",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_src": "index_runmatching",
+      "_tgt": "index_calculatematchscore",
+      "source": "index_calculatematchscore",
+      "target": "index_runmatching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services\\notification-service\\src\\index.js",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_src": "services_notification_service_src_index_js",
+      "_tgt": "index_handlekafkaevent",
+      "source": "services_notification_service_src_index_js",
+      "target": "index_handlekafkaevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "shared\\smoke.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "shared_smoke_js",
+      "_tgt": "smoke_runsmoketest",
+      "source": "shared_smoke_js",
+      "target": "smoke_runsmoketest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "shared_kafka_index_js",
+      "_tgt": "index_createproducer",
+      "source": "shared_kafka_index_js",
+      "target": "index_createproducer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "shared_kafka_index_js",
+      "_tgt": "index_createconsumer",
+      "source": "shared_kafka_index_js",
+      "target": "index_createconsumer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "shared\\kafka\\index.js",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "shared_kafka_index_js",
+      "_tgt": "index_formatmessage",
+      "source": "shared_kafka_index_js",
+      "target": "index_formatmessage",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

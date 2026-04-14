@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Activate Caveman Skill",
+  "description": "Activates the caveman skill automatically whenever a new conversation starts",
+  "version": "1",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Activate and use the caveman skill for this conversation."
+  }
+}

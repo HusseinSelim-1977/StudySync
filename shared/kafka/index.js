@@ -1,20 +1,20 @@
 const { Kafka } = require('kafkajs');
-
-const kafka = new Kafka({
-  clientId: 'studysync-core',
-  brokers: [process.env.KAFKA_BROKERS || 'localhost:9092'],
-  retry: {
-    initialRetryTime: 300,
-    retries: 5
-  }
-});
+const crypto = require('crypto');
 
 /**
  * Creates and returns a connected Kafka Producer
- * @param {string} clientId
+ * @param {string} clientId - unique client identifier for this producer
  * @returns {import('kafkajs').Producer}
  */
 const createProducer = (clientId) => {
+  const kafka = new Kafka({
+    clientId: clientId || 'studysync-core',
+    brokers: [process.env.KAFKA_BROKERS || 'localhost:9092'],
+    retry: {
+      initialRetryTime: 300,
+      retries: 5
+    }
+  });
   return kafka.producer({
     allowAutoTopicCreation: true
   });
@@ -26,6 +26,14 @@ const createProducer = (clientId) => {
  * @returns {import('kafkajs').Consumer}
  */
 const createConsumer = (groupId) => {
+  const kafka = new Kafka({
+    clientId: `${groupId}-consumer`,
+    brokers: [process.env.KAFKA_BROKERS || 'localhost:9092'],
+    retry: {
+      initialRetryTime: 300,
+      retries: 5
+    }
+  });
   return kafka.consumer({ groupId });
 };
 
@@ -50,7 +58,6 @@ const TOPICS = {
  * Utility to format Kafka message payload
  */
 const formatMessage = (eventName, producerService, payload, correlationId) => {
-  const crypto = require('crypto');
   return {
     eventName,
     timestamp: new Date().toISOString(),
